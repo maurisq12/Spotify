@@ -10,6 +10,7 @@ export class SpotifyService {
   private clientId: string = '8d3ec9e12ff749fbbacd37e9a5b4ecd5';
   private clientSecret: string = '9a8c20b25a024aeaa80ce8b030887e2e';
   tokenUrl: string = "https://accounts.spotify.com/api/token";
+  requestsUrl:string = "https://api.spotify.com/v1";
   idAndSecret: string = btoa(this.clientId + ":" + this.clientSecret);
   private token: string = '';
   http: any;
