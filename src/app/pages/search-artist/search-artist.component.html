@@ -1,0 +1,22 @@
+<h1>Search artists</h1>
+
+<div class="row">
+  <div class="col-5 mb-2">
+    <shared-search-box placeholder="Escriba el nombre del artista..."
+      (onValue)="buscarArtista($event)"></shared-search-box>
+  </div>
+  <hr>
+  @if (artists !== []) {
+    <artist-card [artist]="artists[0]"></artist-card>
+  <hr>
+  <div>
+    <h5>Álbumes de {{artists[0].name}}:</h5>
+    <div>
+      <album-cardlist [albums]="artistAlbums"></album-cardlist>
+    </div>
+
+  </div>
+  }
+  <hr>
+
+</div>
