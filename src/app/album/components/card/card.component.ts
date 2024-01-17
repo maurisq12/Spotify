@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Item as Album} from '../../../interfaces/albums.interface';
+import { Item as Album} from '../../../interfaces/artist-albums.interface';
 import { LazyImageComponent } from '../../../shared/components/lazy-image/lazy-image.component';
 import { CommonModule } from '@angular/common';
 

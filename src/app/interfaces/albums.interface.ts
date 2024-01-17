@@ -1,68 +1,49 @@
 export interface SpotiResult {
-  href:     string;
-  items:    Item[];
-  limit:    number;
-  next:     string;
-  offset:   number;
-  previous: null;
-  total:    number;
-}
-
-export interface Item {
-  album_group:            AlbumGroup;
-  album_type:             AlbumGroup;
+  album_type:             string;
   artists:                Artist[];
   available_markets:      string[];
+  copyrights:             Copyright[];
+  external_ids:           ExternalIDS;
   external_urls:          ExternalUrls;
+  genres:                 any[];
   href:                   string;
   id:                     string;
   images:                 Image[];
+  label:                  string;
   name:                   string;
+  popularity:             number;
   release_date:           Date;
-  release_date_precision: ReleaseDatePrecision;
+  release_date_precision: string;
   total_tracks:           number;
-  type:                   AlbumGroup;
+  tracks:                 Tracks;
+  type:                   string;
   uri:                    string;
-}
-
-export enum AlbumGroup {
-  Album = "album",
-  Single = "single",
 }
 
 export interface Artist {
   external_urls: ExternalUrls;
   href:          string;
-  id:            ID;
-  name:          Name;
-  type:          Type;
-  uri:           URI;
+  id:            string;
+  name:          string;
+  type:          ArtistType;
+  uri:           string;
 }
 
 export interface ExternalUrls {
   spotify: string;
 }
 
-export enum ID {
-  The6EUKZXaKkcviH0Ku9W2N3V = "6eUKZXaKkcviH0Ku9w2n3V",
-  The718COspgdWOnwOFPJHRZHS = "718COspgdWOnwOFpJHRZHS",
-  The7F5Zgnp2SPUuuzKplmRkt7 = "7f5Zgnp2spUuuzKplmRkt7",
-}
-
-export enum Name {
-  EdSheeran = "Ed Sheeran",
-  LostFrequencies = "Lost Frequencies",
-  LukeCombs = "Luke Combs",
-}
-
-export enum Type {
+export enum ArtistType {
   Artist = "artist",
 }
 
-export enum URI {
-  SpotifyArtist6EUKZXaKkcviH0Ku9W2N3V = "spotify:artist:6eUKZXaKkcviH0Ku9w2n3V",
-  SpotifyArtist718COspgdWOnwOFPJHRZHS = "spotify:artist:718COspgdWOnwOFpJHRZHS",
-  SpotifyArtist7F5Zgnp2SPUuuzKplmRkt7 = "spotify:artist:7f5Zgnp2spUuuzKplmRkt7",
+export interface Copyright {
+  text: string;
+  type: string;
+}
+
+export interface ExternalIDS {
+  upc: string;
 }
 
 export interface Image {
@@ -71,6 +52,33 @@ export interface Image {
   width:  number;
 }
 
-export enum ReleaseDatePrecision {
-  Day = "day",
+export interface Tracks {
+  href:     string;
+  items:    Item[];
+  limit:    number;
+  next:     null;
+  offset:   number;
+  previous: null;
+  total:    number;
+}
+
+export interface Item {
+  artists:           Artist[];
+  available_markets: string[];
+  disc_number:       number;
+  duration_ms:       number;
+  explicit:          boolean;
+  external_urls:     ExternalUrls;
+  href:              string;
+  id:                string;
+  is_local:          boolean;
+  name:              string;
+  preview_url:       null | string;
+  track_number:      number;
+  type:              ItemType;
+  uri:               string;
+}
+
+export enum ItemType {
+  Track = "track",
 }

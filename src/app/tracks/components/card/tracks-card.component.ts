@@ -1,25 +1,23 @@
 import { Component, Input } from '@angular/core';
 import { LazyImageComponent } from '../../../shared/components/lazy-image/lazy-image.component';
-import {  Item as  Artist} from '../../../interfaces/artist.interface';
 import { CommonModule } from '@angular/common';
-
-
+import { Item as Tracks } from '../../../interfaces/tracks.interface';
 
 @Component({
-    selector: 'artist-card',
+    selector: 'tracks-card',
     standalone: true,
-    templateUrl: './card.component.html',
+    templateUrl: './tracks-card.component.html',
     imports: [LazyImageComponent, CommonModule]
 })
-export class CardComponent {
+export class TracksCardComponent {
 
 
   @Input()
-  public artist!: Artist;
+  public track!: Tracks;
 
 
   ngOnInit():void{
-    if(!this.artist) throw new Error('No se cargó el artista');
+    if(!this.track) throw new Error('No se cargó el track');
   }
 
 

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CardComponent } from "../card/card.component";
-import { Item as Album} from '../../../interfaces/albums.interface';
+import { Item as Album} from '../../../interfaces/artist-albums.interface';
 
 @Component({
     selector: 'album-cardlist',

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
 import { Item as Artista } from '../../interfaces/artist.interface';
-import { Item as Album } from '../../interfaces/albums.interface';
+import { Item as Album } from '../../interfaces/artist-albums.interface';
 
 import { SearchBoxComponent } from "../../shared/components/search-box/search-box.component";
 import { CommonModule } from '@angular/common';
-import { CardComponent } from "../../artist/components/card/card.component";
+import { ArtistCardComponent } from "../../artist/components/card/artist-card.component";
 import { CardlistComponent } from "../../album/components/cardlist/cardlist.component";
 
 @Component({
@@ -13,7 +13,7 @@ import { CardlistComponent } from "../../album/components/cardlist/cardlist.comp
     standalone: true,
     templateUrl: './search-artist.component.html',
     styleUrl: './search-artist.component.css',
-    imports: [SearchBoxComponent, CommonModule, CardComponent, CardlistComponent]
+    imports: [SearchBoxComponent, CommonModule, CardlistComponent, ArtistCardComponent]
 })
 export class SearchArtistComponent {
 

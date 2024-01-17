@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
 import { SpotiToken, SpotiResult as releasesResult } from '../interfaces/spotify.interfaces';
 import { SpotiResult as artistResult } from '../interfaces/artist.interface';
+import { SpotiResult as artistAlbumResult } from '../interfaces/artist-albums.interface';
+import { SpotiResult as topTracksResult } from '../interfaces/top-tracks.interface';
+import { SpotiResult as tracksResult } from '../interfaces/tracks.interface';
 import { SpotiResult as albumResult } from '../interfaces/albums.interface';
 
 @Injectable({
@@ -121,7 +124,28 @@ export class SpotifyService {
     );
   }
 
-  getArtistAlbums(artistID:string): Observable<albumResult>{
+  getArtistByID(id:string): Observable<artistResult>{
+    return this.getAccessToService().pipe(
+      switchMap(token => {
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Authorization': `Bearer ${token}`,
+          })
+        };
+
+        const url = `${this.requestsUrl}/artists/${id}`;
+
+        return this.httpClient.get<artistResult>(url, httpOptions).pipe(
+          catchError(error => {
+            console.error('Error al obtener artista:', error);
+            throw error;
+          })
+        );
+      })
+    );
+  }
+
+  getArtistAlbums(artistID:string): Observable<artistAlbumResult>{
     return this.getAccessToService().pipe(
       switchMap(token => {
         const httpOptions = {
@@ -132,9 +156,74 @@ export class SpotifyService {
 
         const url = `${this.requestsUrl}/artists/${artistID}/albums?limit=10`;
 
-        return this.httpClient.get<albumResult>(url, httpOptions).pipe(
+        return this.httpClient.get<artistAlbumResult>(url, httpOptions).pipe(
           catchError(error => {
             console.error('Error al obtener albumes:', error);
+            throw error;
+          })
+        );
+      })
+    );
+
+  }
+
+  getArtistTopTracks(artistID:string): Observable<topTracksResult>{
+    return this.getAccessToService().pipe(
+      switchMap(token => {
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Authorization': `Bearer ${token}`,
+          })
+        };
+
+        const url = `${this.requestsUrl}/artists/${artistID}/top-tracks?market=CR`;
+
+        return this.httpClient.get<topTracksResult>(url, httpOptions).pipe(
+          catchError(error => {
+            console.error('Error al obtener top tracks:', error);
+            throw error;
+          })
+        );
+      })
+    );
+
+  }
+
+  getTracks(entrada:string): Observable<tracksResult>{
+    return this.getAccessToService().pipe(
+      switchMap(token => {
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Authorization': `Bearer ${token}`,
+          })
+        };
+
+        const url = `${this.requestsUrl}/search?q=${entrada}&type=track&limit=10`;
+
+        return this.httpClient.get<tracksResult>(url, httpOptions).pipe(
+          catchError(error => {
+            console.error('Error al obtener tracks:', error);
+            throw error;
+          })
+        );
+      })
+    );
+  }
+
+  getAlbum(albumID:string): Observable<albumResult>{
+    return this.getAccessToService().pipe(
+      switchMap(token => {
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Authorization': `Bearer ${token}`,
+          })
+        };
+
+        const url = `${this.requestsUrl}/albums/${albumID}`;
+
+        return this.httpClient.get<albumResult>(url, httpOptions).pipe(
+          catchError(error => {
+            console.error('Error al obtener tracks:', error);
             throw error;
           })
         );

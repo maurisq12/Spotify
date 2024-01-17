@@ -1,0 +1,35 @@
+<table>
+  @if(tracks.length === 0){
+  <div class="alert alert-warning mt-3">
+    No hay canciones para mostrar
+  </div>
+  }
+  @else{
+
+
+  <table class="table table-hover text-white">
+    <thead>
+      <tr>
+        <th>Foto</th>
+        <th>Álbum</th>
+        <th>Canción</th>
+        <th>Vista previa</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (track of tracks; track $index) {
+      <tr>
+        <td><img [src]="track.album.images[0].url" height="50" width="50"></td>
+        <td>{{track.album.name}}</td>
+        <td>{{track.name}}</td>
+        <td>
+          {{track.preview_url}}
+        </td>
+      </tr>
+
+      }
+
+    </tbody>
+
+  </table>
+  }

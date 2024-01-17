@@ -1,0 +1,20 @@
+<div class="card mb-2 text-center bg-dark">
+  <shared-lazy-image
+    [url]="track.album.images[1].url"
+    [alt]="'Imagen de '+track.name"
+    class="card-img-top"
+  ></shared-lazy-image>
+  <div class="card-body text-white">
+    <h4 class="card-text">
+      {{track.name}}
+    </h4>
+    <p class="card-text fst-italic"> {{track.duration_ms | date:'mm:ss'}} </p>
+  </div>
+  <div class="card-body text-white d-flex justify-content-center p-1">
+    @for (unArtista of track.artists; track $index) {
+      <a href="#" class="card-link rounded bg-light p-1 text-decoration-none text-dark mx-1">
+        {{unArtista.name}}
+      </a>
+    }
+  </div>
+</div>
