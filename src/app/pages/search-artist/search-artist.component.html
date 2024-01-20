@@ -6,7 +6,7 @@
       (onValue)="buscarArtista($event)"></shared-search-box>
   </div>
   <hr>
-  @if (artists !== []) {
+  @if (artists[0]) {
     <artist-card [artist]="artists[0]"></artist-card>
   <hr>
   <div>

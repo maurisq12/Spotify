@@ -42,6 +42,8 @@ export class SearchArtistComponent {
       }
     );
 
+    this.spotiService.organizeHistory(`artist:${artista}`);
+
 
 
   }

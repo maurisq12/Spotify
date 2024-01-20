@@ -22,12 +22,16 @@ export class ArtistCardComponent {
   }
 
   redirectToArtistPage(): void {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        artist: this.artist
-      }
-    };
-    this.router.navigate(['/artists/details', this.artist.id], navigationExtras);
+    this.router.navigate(['/artists/details', this.artist.id]);
+  }
+
+  redirectToArtistSpotify(): void {
+    window.open(this.artist.uri, '_blank');
+    window.location.href = this.artist.uri;
+  }
+
+  isActiveRoute(route: string): boolean {
+    return this.router.url.toLowerCase().includes(route);
   }
 }
 

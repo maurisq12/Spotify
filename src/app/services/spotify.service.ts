@@ -7,6 +7,7 @@ import { SpotiResult as artistAlbumResult } from '../interfaces/artist-albums.in
 import { SpotiResult as topTracksResult } from '../interfaces/top-tracks.interface';
 import { SpotiResult as tracksResult } from '../interfaces/tracks.interface';
 import { SpotiResult as albumResult } from '../interfaces/albums.interface';
+import { SpotiResult as artistByID } from '../interfaces/artistByID.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,11 @@ export class SpotifyService {
   private ultimoToken: Date = new Date();
 
   http: any;
+  private _history: string[] = [];
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this.loadLocalStorage();
+  }
 
   body = 'grant_type=client_credentials';
 
@@ -124,7 +128,7 @@ export class SpotifyService {
     );
   }
 
-  getArtistByID(id:string): Observable<artistResult>{
+  getArtistByID(id:string): Observable<artistByID>{
     return this.getAccessToService().pipe(
       switchMap(token => {
         const httpOptions = {
@@ -135,7 +139,7 @@ export class SpotifyService {
 
         const url = `${this.requestsUrl}/artists/${id}`;
 
-        return this.httpClient.get<artistResult>(url, httpOptions).pipe(
+        return this.httpClient.get<artistByID>(url, httpOptions).pipe(
           catchError(error => {
             console.error('Error al obtener artista:', error);
             throw error;
@@ -231,6 +235,44 @@ export class SpotifyService {
     );
 
   }
+
+
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //                                                                     Servicios de localStorage
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+  get history():string[]{
+    return [...this._history];
+  }
+
+  public organizeHistory(tag:string){
+
+    tag = tag.toLocaleLowerCase();
+
+    //case: si ya está el tag en el history
+    if(this._history.includes(tag)){
+      this._history=this._history.filter((oldTag) => oldTag !==tag);
+    }
+
+    this._history.unshift(tag);
+    this._history = this._history.splice(0,10);
+    this.saveLocalStorage();
+
+  }
+
+  private saveLocalStorage():void{
+    localStorage.setItem('history', JSON.stringify(this._history));
+  }
+
+  private loadLocalStorage():void{
+    if(!localStorage.getItem('history')) return;
+
+    this._history = JSON.parse(localStorage.getItem('history')!);
+
+    if(this.history.length === 0) return;
+  }
+
 
 
 

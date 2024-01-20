@@ -24,6 +24,8 @@ export class SearchTrackComponent {
     this.spotiService.getTracks(entrada).subscribe(
       resp=> this.tracks=resp.tracks.items
     );
+    this.spotiService.organizeHistory(`track:${entrada}`);
   }
+
 
 }

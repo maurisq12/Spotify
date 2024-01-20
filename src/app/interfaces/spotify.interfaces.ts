@@ -4,6 +4,15 @@ export interface SpotiToken {
     expires_in:   number;
 }
 
+export interface TrackTableItem{
+  id:        string;
+  photo:     string;
+  album:    string;
+  name:     string;
+  preview:  string | null;
+  albumID: string;
+
+}
 
 export interface SpotiResult {
   albums: Albums;

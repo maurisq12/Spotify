@@ -5,40 +5,59 @@ import { ArtistCardComponent } from '../../artist/components/card/artist-card.co
 import { TracksTableComponent } from '../../tracks/components/tracks-table/tracks-table.component';
 import { SpotifyService } from '../../services/spotify.service';
 import { Track } from '../../interfaces/top-tracks.interface';
+import { TrackTableItem } from '../../interfaces/spotify.interfaces';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-artist-page',
   standalone: true,
   templateUrl: './artist-page.component.html',
   styles: ``,
-  imports: [ArtistCardComponent, TracksTableComponent]
+  imports: [ArtistCardComponent, TracksTableComponent, CommonModule]
 })
 export class ArtistPageComponent {
 
   artist?: Artist;
   artistID: string = "";
-  tracks:Track[] = []; // Definir como string
+  tracks: Track[] = []; // Definir como string
+  tabla: TrackTableItem[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
     private spotifyService: SpotifyService) { }
 
-  ngOnInit(): void {
-    console.log("Llegué al init de artist page");
-    this.activatedRoute.paramMap.subscribe(params => {
-      this.artistID = params.get('id') ?? ''; // Utilizar el operador de coalescencia nula
-      if (this.artistID) {
-        // Recuperar el objeto del artista desde el estado de la navegación
-        const state = history.state;
-        this.artist = state.artist;
-      } else {
-        console.log("No le llegó artista a la pag de artista");
-      }
-    });
+    ngOnInit(): void {
+      this.activatedRoute.paramMap.subscribe(params => {
+        this.artistID = params.get('id') ?? '';
+        console.log("ME LLEGÓ: " + this.artistID + ".");
+      });
 
-    // Aquí deberías completar la lógica de la suscripción, ya que tu código actual está incompleto.
-    this.spotifyService.getArtistTopTracks(this.artistID).subscribe(response => {
-      this.tracks = response.tracks;
-      // Manejar la respuesta de la solicitud de las mejores canciones del artista.
-    });
+      this.spotifyService.getArtistByID(this.artistID).subscribe(
+        resp => {
+          this.artist = resp;
+          console.log("nombre de artista:"+this.artist);
+
+          this.spotifyService.getArtistTopTracks(this.artistID).subscribe(response => {
+            this.tracks = response.tracks;
+            this.tabla = this.tracks.map(this.mapTrackToTableTrack);
+          });
+        },
+        error => {
+          console.error('Error al obtener el artista:', error);
+        }
+      );
+    }
+
+
+  mapTrackToTableTrack(track: Track): TrackTableItem {
+    return {
+      id:track.id,
+      photo: track.album.images[0].url,
+      album: track.album.name,
+      name: track.name,
+      preview: track.preview_url,
+      albumID: track.album.id,
+    };
   }
+
+
 }

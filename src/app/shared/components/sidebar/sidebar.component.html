@@ -1,4 +1,4 @@
-<div class="bg-transparent border-right p-3" id="sidebar">
+<!--<div class="bg-transparent border-right p-3" id="sidebar">
 
   <div>
 
@@ -18,4 +18,89 @@
     </ul>
 
   </div>
+</div>-->
+
+
+
+<!--
+<div class="bg-dark border-right p-3 m-2" id="sidebar">
+  <h3 class="text-light"> Búsquedas recientes</h3>
+  <hr class="text-white">
+
+  <div class="list-group list-reset ">
+
+    @for (data of history; track $index) {
+      <button
+      (click)="buscarHistory(data)"
+      class="list-group-item list-group-item-action list-group-item-light">
+      Tipo: {{data.split(':')[0]| titlecase}}
+      Buscado: {{data.split(':')[1] | titlecase}}
+      </button>
+    }
+
+
+  </div>
+</div> -->
+
+<div class="bg-dark border-round p-3 m-2" id="sidebar">
+  <h3>Historial</h3>
+<section class="pt-2">
+  <ul class="timeline-with-icons">
+    <li class="timeline-item mb-5">
+      <span class="timeline-icon">
+        <span class="material-symbols-outlined">
+          music_note
+          </span>
+      </span>
+
+      <h6 class="fw-bold">Stairway to heaven</h6>
+      <p class="text-bg-dark mb-2 fw-bold">11 March 2020</p>
+      <p class="text-bg-dark">
+        Track
+      </p>
+    </li>
+
+    <li class="timeline-item mb-5">
+
+      <span class="timeline-icon">
+        <span class="material-symbols-outlined">
+          artist
+          </span>
+      </span>
+      <h6 class="fw-bold">Kanye</h6>
+      <p class="text-bg-dark mb-2 fw-bold">19 March 2020</p>
+      <p class="text-bg-dark">
+        Artist
+      </p>
+    </li>
+
+    <li class="timeline-item mb-5">
+
+      <span class="timeline-icon">
+        <span class="material-symbols-outlined">
+          music_note
+          </span>
+      </span>
+      <h6 class="fw-bold">Our team exceeds 10 people</h6>
+      <p class="text-bg-dark mb-2 fw-bold">24 June 2020</p>
+      <p class="text-bg-dark">
+        Track
+      </p>
+    </li>
+
+    <li class="timeline-item mb-5">
+
+      <span class="timeline-icon">
+        <span class="material-symbols-outlined">
+          artist
+          </span>
+      </span>
+      <h6 class="fw-bold">Earned the first million $!</h6>
+      <p class="text-bg-dark mb-2 fw-bold">15 October 2020</p>
+      <p class="text-bg-dark">
+        Artist
+      </p>
+    </li>
+  </ul>
+</section>
 </div>

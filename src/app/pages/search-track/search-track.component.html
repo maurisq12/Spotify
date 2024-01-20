@@ -5,7 +5,7 @@
     <shared-search-box placeholder="Escriba el nombre de la canción..."
       (onValue)="buscarCancion($event)"></shared-search-box>
   </div>
-  @if (tracks !== []) {
+  @if (tracks[0]) {
   <hr>
   <div>
     <h5>Resultados:</h5>

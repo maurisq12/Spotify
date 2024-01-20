@@ -11,7 +11,7 @@
   </div>
   <div class="card-body text-white d-flex justify-content-center">
     @for (unArtista of album.artists; track $index) {
-      <a href="#" class="card-link rounded bg-light p-1 text-decoration-none text-dark mx-1">
+      <a [routerLink]="['/artists/details', unArtista.id]" class="card-link rounded bg-light p-1 text-decoration-none text-dark mx-1">
         {{unArtista.name}}
       </a>
     }

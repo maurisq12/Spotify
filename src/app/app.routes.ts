@@ -29,7 +29,7 @@ export const routes: Routes = [
       }]
   },
   {
-    path: 'tracks',
+    path: 'tracks/search',
     component: SearchTrackComponent
   },
   {

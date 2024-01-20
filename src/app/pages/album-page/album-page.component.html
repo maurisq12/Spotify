@@ -1,5 +1,8 @@
-<p>album-page works!</p>
-<p>{{album?.name}}</p>
-<div>
-  <tracks-table [tracks]="album?.tracks?.items!" ></tracks-table>
+<div class="bg-dark bg-gradient border border-white rounded-4 me-1 p-2 ps-4">
+  <h2>{{album?.name}}</h2>
+  <p>Álbum de {{artist?.name}} publicado en {{album?.release_date | date:"yyyy"}}.</p>
+  <p>Presenta un total de {{album?.total_tracks}} canciones.</p>
+</div>
+<div class="mt-2">
+  <tracks-table [trackList]="tabla"></tracks-table>
 </div>

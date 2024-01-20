@@ -1,5 +1,5 @@
-<table>
-  @if(tracks.length === 0){
+
+  @if(trackList.length === 0){
   <div class="alert alert-warning mt-3">
     No hay canciones para mostrar
   </div>
@@ -17,13 +17,15 @@
       </tr>
     </thead>
     <tbody>
-      @for (track of tracks; track $index) {
+      @for (track of trackList; track $index) {
       <tr>
-        <td><img [src]="track.album.images[0].url" height="50" width="50"></td>
-        <td>{{track.album.name}}</td>
+        <td><img style="cursor: pointer;" [routerLink]="['/album/', track.albumID]" [src]="track.photo" height="auto" width="150"></td>
+        <td style="cursor: pointer;" [routerLink]="['/album/', track.albumID]"><strong>{{track.album}}</strong></td>
         <td>{{track.name}}</td>
         <td>
-          {{track.preview_url}}
+          <iframe style="border-radius:12px"
+          [src]="getSafeUrl(track.id)"
+           width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </td>
       </tr>
 
