@@ -4,6 +4,7 @@ import { SearchArtistComponent } from './pages/search-artist/search-artist.compo
 import { ArtistPageComponent } from './pages/artist-page/artist-page.component';
 import { SearchTrackComponent } from './pages/search-track/search-track.component';
 import { AlbumPageComponent } from './pages/album-page/album-page.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
 
 
 export const routes: Routes = [
@@ -26,7 +27,11 @@ export const routes: Routes = [
       {
         path: "details/:id",
         component: ArtistPageComponent,
-      }]
+      },
+      {
+        path: '**',
+        component: SearchArtistComponent
+      },]
   },
   {
     path: 'tracks/search',
@@ -35,6 +40,14 @@ export const routes: Routes = [
   {
     path: 'album/:id',
     component: AlbumPageComponent
+  },
+  {
+    path: 'about',
+    component: AboutPageComponent
+  },
+  {
+    path: '**',
+    component: HomeComponent
   },
 
 

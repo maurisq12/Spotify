@@ -1,4 +1,4 @@
-<div class="d-flex mb-3">
+<div class="d-flex mb-3" *ngIf="(artist)">
   <div class="me-4">
     <img [src]="artist.images[1].url" alt="Imagen de {{artist.name}}" height="200" width="200">
   </div>
@@ -8,23 +8,17 @@
     </h1>
     <p *ngIf="isActiveRoute('/artists/details')"><strong>Seguidores: </strong>{{artist.followers.total | number}}</p>
     <p *ngIf="isActiveRoute('/artists/details')"><strong>Generos: </strong>{{artist.genres}}</p>
-    <button type="button" class="btn btn-outline-light btn-sm h-auto mt-2 p-2 px-3"
-    (click)="redirectToArtistSpotify()"
-    *ngIf="isActiveRoute('/artists/details')"
-    >Ir a la página del artista</button>
+    <button type="button" class="btn btn-outline-light btn-sm h-auto mt-2 p-2 px-3" (click)="redirectToArtistSpotify()"
+      *ngIf="isActiveRoute('/artists/details')">Ir a la página del artista</button>
   </div>
 
   <div class="ms-5">
-    <button type="button" class="btn btn-outline-light btn-sm h-auto mt-2 px-3"
-    (click)="redirectToArtistPage()"
-    *ngIf="isActiveRoute('/artists/search')"
-    >Ver artista</button>
+    <button type="button" class="btn btn-outline-light btn-sm h-auto mt-2 px-3" (click)="redirectToArtistPage()"
+      *ngIf="isActiveRoute('/artists/search')">Ver artista</button>
   </div>
 
   <div class="ms-auto me-5">
-    <button type="button" class="btn btn-outline-danger btn-sm h-auto mt-2 px-3"
-    (click)="navigateBack()"
-    *ngIf="isActiveRoute('/artists/details')"
-    >Regresar</button>
+    <button type="button" class="btn btn-outline-danger btn-sm h-auto mt-2 px-3" (click)="navigateBack()"
+      *ngIf="isActiveRoute('/artists/details')">Regresar</button>
   </div>
 </div>

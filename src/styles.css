@@ -5,3 +5,7 @@ body {
   color: #fff; /* Color de texto blanco, para mejorar la legibilidad */
 }
 
+* {
+  box-sizing: border-box;
+}
+

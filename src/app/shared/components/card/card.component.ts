@@ -51,7 +51,7 @@ export class CardComponent {
     }
   }
 
-  cerrarPlay(){
+  cerrarPlay() {
     if (this.divPlay) {
       this.renderer.setStyle(this.divPlay.nativeElement, 'display', 'none');
     }

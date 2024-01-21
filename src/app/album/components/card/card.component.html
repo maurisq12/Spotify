@@ -1,12 +1,7 @@
 <div class="card mb-2 text-center bg-dark">
-  <shared-lazy-image
-    [url]="album.images[1].url"
-    [alt]="album.name"
-    class="card-img-top"
-    [routerLink]="['/album/', album.id]"
-    style="cursor: pointer;"
-  ></shared-lazy-image>
-  <div class="card-body text-white" >
+  <shared-lazy-image [url]="album.images[1].url" [alt]="album.name" class="card-img-top"
+    [routerLink]="['/album/', album.id]" style="cursor: pointer;"></shared-lazy-image>
+  <div class="card-body text-white">
     <h4 class="card-text" [routerLink]="['/album/', album.id]" style="cursor: pointer;">
       {{album.name}}
     </h4>
@@ -14,9 +9,10 @@
   </div>
   <div class="card-body text-white d-flex justify-content-center p-1">
     @for (unArtista of album.artists; track $index) {
-      <a [routerLink]="['/artists/details', unArtista.id]" class="card-link rounded bg-light p-1 text-decoration-none text-dark mx-1">
-        {{unArtista.name}}
-      </a>
+    <a [routerLink]="['/artists/details', unArtista.id]"
+      class="card-link rounded bg-light p-1 text-decoration-none text-dark mx-1">
+      {{unArtista.name}}
+    </a>
     }
   </div>
 </div>

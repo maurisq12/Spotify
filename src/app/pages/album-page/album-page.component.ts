@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Item as Artist } from '../../interfaces/artist.interface';
 import { SpotifyService } from '../../services/spotify.service';
 import { SpotiResult as Album, Item } from '../../interfaces/albums.interface';
 import { TracksTableComponent } from "../../tracks/components/tracks-table/tracks-table.component";
 import { TrackTableItem } from '../../interfaces/spotify.interfaces';
 import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-album-page',
@@ -23,7 +24,8 @@ export class AlbumPageComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private spotifyService: SpotifyService
+    private spotifyService: SpotifyService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -58,4 +60,10 @@ export class AlbumPageComponent {
       albumID: this.album?.id || '',
     };
   }
+
+  navigateBack(): void {
+    this.location.back();
+  }
+
+
 }
