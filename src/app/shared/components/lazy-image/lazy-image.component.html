@@ -1,13 +1,12 @@
-<img
-  [src]="url"
-  [alt]="alt"
-  (load)="onLoad()"
-  class="card-img-top animate__animated animate__fadeIn animate__slower"
-  [ngStyle]="{'display': hasLoaded ? '' : 'none'}"
->
+<div class="container">
+  <img [src]="url" [alt]="alt" (load)="onLoad()" class="card-img-top animate__animated animate__fadeIn animate__slower"
+    [ngStyle]="{'display': hasLoaded ? '' : 'none'}">
+  <div *ngIf="isPlayable" class="overlay">
+    <a class="icon" title="User Profile">
+      <img class="img" src="../../../../assets/playIcon.png">
+    </a>
+  </div>
+</div>
 @if(!hasLoaded){
-    <img src="assets/images/rings.svg" alt="Loading..."
-    height="35"
-    width="35"
-    class="mt-3">
+  <img src="../../../../assets/rings.svg" alt="Loading..." height="35" width="35" class="mt-3">
 }

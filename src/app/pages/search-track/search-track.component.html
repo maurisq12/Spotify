@@ -3,7 +3,8 @@
 <div class="row">
   <div class="col-5 mb-2">
     <shared-search-box placeholder="Escriba el nombre de la canción..."
-      (onValue)="buscarCancion($event)"></shared-search-box>
+      (onValue)="buscarCancion($event)"
+      [value]="inputValue"></shared-search-box>
   </div>
   @if (tracks[0]) {
   <hr>

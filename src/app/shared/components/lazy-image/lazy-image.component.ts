@@ -6,11 +6,15 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './lazy-image.component.html',
+  styleUrl: './lazy-image.component.css',
 })
 export class LazyImageComponent {
 
   @Input()
   public url!:string;
+
+  @Input()
+  public isPlayable:boolean=false;
 
   @Input()
   public alt!:string;

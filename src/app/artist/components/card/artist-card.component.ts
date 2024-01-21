@@ -3,6 +3,8 @@ import { LazyImageComponent } from '../../../shared/components/lazy-image/lazy-i
 import { Item as Artist } from '../../../interfaces/artist.interface';
 import { CommonModule } from '@angular/common';
 import { Router, NavigationExtras } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'artist-card',
@@ -12,7 +14,8 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class ArtistCardComponent {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private location: Location) { }
 
   @Input()
   public artist!: Artist;
@@ -32,6 +35,10 @@ export class ArtistCardComponent {
 
   isActiveRoute(route: string): boolean {
     return this.router.url.toLowerCase().includes(route);
+  }
+
+  navigateBack(): void {
+    this.location.back();
   }
 }
 

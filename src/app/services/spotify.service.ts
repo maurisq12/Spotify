@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
-import { SpotiToken, SpotiResult as releasesResult } from '../interfaces/spotify.interfaces';
+import { SpotiToken, SpotiResult as releasesResult, HistoryItem, HistoryType } from '../interfaces/spotify.interfaces';
 import { SpotiResult as artistResult } from '../interfaces/artist.interface';
 import { SpotiResult as artistAlbumResult } from '../interfaces/artist-albums.interface';
 import { SpotiResult as topTracksResult } from '../interfaces/top-tracks.interface';
@@ -22,7 +22,7 @@ export class SpotifyService {
   private ultimoToken: Date = new Date();
 
   http: any;
-  private _history: string[] = [];
+  private _history: HistoryItem[] = [];
 
   constructor(private httpClient: HttpClient) {
     this.loadLocalStorage();
@@ -242,23 +242,26 @@ export class SpotifyService {
   //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-  get history():string[]{
-    return [...this._history];
+
+  get history():HistoryItem[]{
+    return this._history;
   }
 
-  public organizeHistory(tag:string){
+  organizeHistory(nueva: HistoryItem): void {
+    const { query, type } = nueva;
 
-    tag = tag.toLocaleLowerCase();
+    // Filtrar duplicados
+    this._history = this._history.filter(item => !(item.query === query && item.type === type));
 
-    //case: si ya está el tag en el history
-    if(this._history.includes(tag)){
-      this._history=this._history.filter((oldTag) => oldTag !==tag);
+    // Agregar nueva búsqueda al inicio solo si no está ya en el historial
+    if (!this._history.some(item => item.query === query && item.type === type)) {
+      this._history.unshift(nueva);
     }
 
-    this._history.unshift(tag);
-    this._history = this._history.splice(0,10);
-    this.saveLocalStorage();
+    // Limitar el historial a un máximo de 10 elementos
+    this._history = this._history.slice(0, 10);
 
+    this.saveLocalStorage();
   }
 
   private saveLocalStorage():void{

@@ -8,6 +8,7 @@ import { Track } from '../../interfaces/top-tracks.interface';
 import { TrackTableItem } from '../../interfaces/spotify.interfaces';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-artist-page',
   standalone: true,
@@ -23,7 +24,8 @@ export class ArtistPageComponent {
   tabla: TrackTableItem[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
-    private spotifyService: SpotifyService) { }
+    private spotifyService: SpotifyService,
+    ) { }
 
     ngOnInit(): void {
       this.activatedRoute.paramMap.subscribe(params => {
@@ -58,6 +60,8 @@ export class ArtistPageComponent {
       albumID: track.album.id,
     };
   }
+
+
 
 
 }

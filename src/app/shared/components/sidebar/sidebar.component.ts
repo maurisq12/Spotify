@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SpotifyService } from '../../../services/spotify.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { HistoryItem } from '../../../interfaces/spotify.interfaces';
 
 @Component({
   selector: 'shared-sidebar',
@@ -16,21 +17,24 @@ export class SidebarComponent {
     private router:Router){
   }
 
-  get history(): string[]{
+  get history(): HistoryItem[]{
     return this.spotifyService.history;
   }
 
-  buscarHistory(busq:string){
-    console.log("LLAMASTE A UN HISTORY BUTTON");
-    const tipo:string = busq.split(':')[0];
-    const entrada:string = busq.split(':')[1]
-    if (tipo === 'artist'){
-      return this.router.navigate([`/artists/search`]);
+  esFechaHoy(fecha: Date): boolean {
+    if (fecha instanceof Date) {
+      return fecha.toDateString() === new Date().toDateString();
     }
-    else{
-      return this.router.navigate([`/tracks/search`] );
-    }
+    return false;
   }
+
+  repetirBusqueda(term: string, tipo: string): void {
+    this.router.navigate([`/${tipo.toLowerCase()}s/search`], {
+      queryParams: { term: term },
+      replaceUrl: true,
+    });
+  }
+
 
 
 

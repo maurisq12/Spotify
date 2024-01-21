@@ -12,6 +12,9 @@ export class SearchBoxComponent {
   @Input()
   public placeholder: string = '';
 
+  @Input()
+  public value: string = '';
+
   @Output()
   public onValue = new EventEmitter<string>();
 

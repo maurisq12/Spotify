@@ -27,3 +27,27 @@
   justify-content: center;
   margin-left: 1%;
 }
+
+#sidebar {
+  position: relative;
+}
+
+.title-container {
+  text-align: center;
+  background-color: #20d464;
+  position: absolute;
+  padding-bottom: 50px;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px; /* Ajusta según sea necesario */
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  z-index: 2; /* Asegúrate de que el z-index sea mayor que el de la sección */
+}
+
+section {
+  position: relative;
+  z-index: 1; /* Puedes ajustar este valor según sea necesario */
+}
+

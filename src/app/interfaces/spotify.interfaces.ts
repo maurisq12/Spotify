@@ -76,5 +76,16 @@ export enum ReleaseDatePrecision {
   Day = "day",
 }
 
+export interface HistoryItem {
+  query:    string;
+  type:     HistoryType;
+  date:     Date;
+}
+
+export enum HistoryType {
+  Artist = "Artist",
+  Track = "Track"
+}
+
 
 
